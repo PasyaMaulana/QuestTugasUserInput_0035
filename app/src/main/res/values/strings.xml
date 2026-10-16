@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">TugasPertemuan5</string>
+    <string name="cd_header_image">Gambar neon laba-laba pada dinding bata</string>
+    <string name="cd_pilih_tanggal">Pilih tanggal</string>
+    <string name="title_form_biodata">Form Biodata</string>
+    <string name="subtitle_form_biodata">Silahkan isi biodata Anda dibawah ini !!!</string>
+    <string name="label_nama_depan">Nama Depan</string>
+    <string name="label_nama_belakang">Nama Belakang</string>
+    <string name="label_email">Email</string>
+    <string name="label_tgl_lahir">Tgl Lahir</string>
+    <string name="label_experience">Experience</string>
+    <string name="label_pilih_skill">Pilih Skill Anda :</string>
+    <string name="skill_android">Android</string>
+    <string name="skill_uiux">UI/UX</string>
+    <string name="skill_web">Web</string>
+    <string name="btn_proceed">Proceed</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_batal">Batal</string>
+    <string name="msg_proceed_success">Data %1$s %2$s berhasil diproses</string>
 </resources>
