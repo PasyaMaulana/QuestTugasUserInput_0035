@@ -15,9 +15,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
@@ -58,6 +60,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.TextUnit
 
 @Composable
@@ -373,6 +376,9 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
         topStart = dimensionResource(R.dimen.card_corner),
         topEnd = dimensionResource(R.dimen.card_corner)
     )
+    var namaDepan by remember { mutableStateOf("") }
+    var namaBelakang by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -407,7 +413,36 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                     )
                     .clip(cardShape)
                     .background(colorResource(R.color.card_background))
-            )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .padding(
+                            horizontal = dimensionResource(R.dimen.card_padding_horizontal),
+                            vertical = dimensionResource(R.dimen.card_padding_vertical)
+                        ),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(
+                        dimensionResource(R.dimen.space_medium)
+                    )
+                ) {
+                    FormHeader()
+                    NamaRow(
+                        namaDepan = namaDepan,
+                        namaBelakang = namaBelakang,
+                        onNamaDepanChange = { namaDepan = it },
+                        onNamaBelakangChange = { namaBelakang = it }
+                    )
+                    FormTextField(
+                        value = email,
+                        onValueChange = { email = it },
+                        label = stringResource(R.string.label_email),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
         }
     }
 }
