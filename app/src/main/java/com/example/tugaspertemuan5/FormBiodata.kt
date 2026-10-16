@@ -1,7 +1,6 @@
 package com.example.tugaspertemuan5
 
 import android.text.format.DateUtils
-import android.widget.Toast
 import androidx.annotation.DimenRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,6 +37,10 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -46,7 +49,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -392,12 +398,52 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
             tglLahir.isNotBlank() &&
             experience.isNotBlank() &&
             (skillAndroid || skillUiux || skillWeb)
-    val context = LocalContext.current
-    val successMsgFormat = stringResource(R.string.msg_proceed_success)
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+    val snackbarDurationMs = integerResource(R.integer.snackbar_duration_ms).toLong()
+    val skillAndroidName = stringResource(R.string.skill_android)
+    val skillUiuxName = stringResource(R.string.skill_uiux)
+    val skillWebName = stringResource(R.string.skill_web)
+    val skillSeparator = stringResource(R.string.skill_separator)
+    val resultFormat = stringResource(R.string.msg_result_format)
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        containerColor = colorResource(R.color.screen_background)
+        containerColor = colorResource(R.color.screen_background),
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackbarHostState,
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(R.dimen.card_padding_horizontal),
+                    vertical = dimensionResource(R.dimen.card_padding_vertical)
+                )
+            ) { data ->
+                Snackbar(
+                    containerColor = colorResource(R.color.brand_purple),
+                    contentColor = colorResource(R.color.white),
+                    shape = RoundedCornerShape(dimensionResource(R.dimen.field_corner)),
+                    action = {
+                        TextButton(
+                            onClick = { data.dismiss() }
+                        ) {
+                            Text(
+                                text = stringResource(R.string.btn_close),
+                                color = colorResource(R.color.white),
+                                fontSize = spResource(R.dimen.text_small),
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                ) {
+                    Text(
+                        text = data.visuals.message,
+                        fontSize = spResource(R.dimen.text_body),
+                        color = colorResource(R.color.white)
+                    )
+                }
+            }
+        }
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -405,7 +451,7 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                 .padding(innerPadding)
         ) {
             Image(
-                painter = painterResource(R.drawable.bg_tiumy),
+                painter = painterResource(R.drawable.bg_purple),
                 contentDescription = stringResource(R.string.cd_header_image),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -484,11 +530,33 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                     ProceedButton(
                         enabled = isFormValid,
                         onClick = {
-                            Toast.makeText(
-                                context,
-                                String.format(successMsgFormat, namaDepan, namaBelakang),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            val selectedSkillsList = mutableListOf<String>()
+                            if (skillAndroid) selectedSkillsList.add(skillAndroidName)
+                            if (skillUiux) selectedSkillsList.add(skillUiuxName)
+                            if (skillWeb) selectedSkillsList.add(skillWebName)
+                            val skillsText = selectedSkillsList.joinToString(skillSeparator)
+
+                            val resultMessage = String.format(
+                                resultFormat,
+                                namaDepan,
+                                namaBelakang,
+                                email,
+                                tglLahir,
+                                experience,
+                                skillsText
+                            )
+
+                            scope.launch {
+                                snackbarHostState.currentSnackbarData?.dismiss()
+                                val job = launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = resultMessage,
+                                        duration = SnackbarDuration.Indefinite
+                                    )
+                                }
+                                delay(snackbarDurationMs)
+                                job.cancel()
+                            }
                         }
                     )
                 }

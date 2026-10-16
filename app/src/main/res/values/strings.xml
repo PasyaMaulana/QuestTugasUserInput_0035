@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">TugasPertemuan5</string>
-    <string name="cd_header_image">Gambar neon laba-laba pada dinding bata</string>
+    <string name="cd_header_image">Header background form biodata</string>
     <string name="cd_pilih_tanggal">Pilih tanggal</string>
     <string name="title_form_biodata">Form Biodata</string>
     <string name="subtitle_form_biodata">Silahkan isi biodata Anda dibawah ini !!!</string>
@@ -17,4 +17,7 @@
     <string name="btn_ok">OK</string>
     <string name="btn_batal">Batal</string>
     <string name="msg_proceed_success">Data %1$s %2$s berhasil diproses</string>
+    <string name="msg_result_format">Nama: %1$s %2$s\nEmail: %3$s\nTgl Lahir: %4$s\nExperience: %5$s\nSkill: %6$s</string>
+    <string name="skill_separator">, </string>
+    <string name="btn_close">Tutup</string>
 </resources>
