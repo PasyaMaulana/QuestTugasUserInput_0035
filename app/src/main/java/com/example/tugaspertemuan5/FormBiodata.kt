@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.DatePicker
@@ -326,5 +329,33 @@ fun SkillSection(
             SkillCheckbox(stringResource(R.string.skill_uiux), uiux, onUiuxChange)
             SkillCheckbox(stringResource(R.string.skill_web), web, onWebChange)
         }
+    }
+}
+
+@Composable
+fun ProceedButton(
+    enabled: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button (
+        onClick = onClick,
+        enabled = enabled,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(dimensionResource(R.dimen.button_height)),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.button_corner)),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = colorResource(R.color.button_enabled),
+            contentColor = colorResource(R.color.white),
+            disabledContainerColor = colorResource(R.color.button_disabled_container),
+            disabledContentColor = colorResource(R.color.button_disabled_content)
+        )
+    ) {
+        Text(
+            text = stringResource(R.string.btn_proceed),
+            fontSize = spResource(R.dimen.text_button),
+            fontWeight = FontWeight.Bold
+        )
     }
 }
