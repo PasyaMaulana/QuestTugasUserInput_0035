@@ -1,7 +1,13 @@
 package com.example.tugaspertemuan5
 
 import androidx.annotation.DimenRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.LocalTextStyle
@@ -11,10 +17,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.TextUnit
 
 @Composable
@@ -56,4 +64,28 @@ fun FormTextField(
             unfocusedTextColor = colorResource(R.color.text_primary)
         )
     )
+}
+
+@Composable
+fun PageIndicator(modifier: Modifier = Modifier) {
+    val total = integerResource(R.integer.dot_count)
+    val active = integerResource(R.integer.dot_active_index)
+
+    Row (
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.dot_spacing))
+    ) {
+        repeat(total) { index ->
+            Box(
+                modifier = Modifier
+                    .size(dimensionResource(R.dimen.dot_size))
+                    .clip(CircleShape)
+                    .background(
+                        colorResource(
+                            if (index == active) R.color.dot_active else R.color.dot_inactive
+                        )
+                    )
+            )
+        }
+    }
 }
