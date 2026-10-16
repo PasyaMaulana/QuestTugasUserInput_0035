@@ -297,3 +297,34 @@ fun SkillCheckbox(
         )
     }
 }
+
+@Composable
+fun SkillSection(
+    android: Boolean,
+    uiux: Boolean,
+    web: Boolean,
+    onAndroidChange: (Boolean) -> Unit,
+    onUiuxChange: (Boolean) -> Unit,
+    onWebChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.space_small))
+    ) {
+        Text(
+            text = stringResource(R.string.label_pilih_skill),
+            fontSize = spResource(R.dimen.text_label),
+            fontWeight = FontWeight.Bold,
+            color = colorResource(R.color.text_primary)
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            SkillCheckbox(stringResource(R.string.skill_android), android, onAndroidChange)
+            SkillCheckbox(stringResource(R.string.skill_uiux), uiux, onUiuxChange)
+            SkillCheckbox(stringResource(R.string.skill_web), web, onWebChange)
+        }
+    }
+}
