@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_height">320dp</dimen>
+    <dimen name="box_top_offset">250dp</dimen>
+    <dimen name="card_corner">32dp</dimen>
+    <dimen name="card_elevation">12dp</dimen>
+    <dimen name="card_padding_horizontal">24dp</dimen>
+    <dimen name="card_padding_vertical">24dp</dimen>
+    <dimen name="field_corner">24dp</dimen>
+    <dimen name="button_corner">20dp</dimen>
+    <dimen name="button_height">52dp</dimen>
+    <dimen name="space_small">8dp</dimen>
+    <dimen name="space_medium">16dp</dimen>
+    <dimen name="space_large">24dp</dimen>
+    <dimen name="dot_size">8dp</dimen>
+    <dimen name="dot_spacing">6dp</dimen>
+    <dimen name="dot_padding_start">16dp</dimen>
+    <dimen name="dot_padding_top">12dp</dimen>
+    <dimen name="text_title">28sp</dimen>
+    <dimen name="text_subtitle">12sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_label">14sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_button">14sp</dimen>
+</resources>
