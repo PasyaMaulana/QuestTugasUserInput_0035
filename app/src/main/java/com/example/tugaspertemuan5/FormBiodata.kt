@@ -47,6 +47,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -368,7 +369,12 @@ fun ProceedButton(
 
 @Composable
 fun FormBiodataScreen(modifier: Modifier = Modifier) {
-    Scaffold (
+    val cardShape = RoundedCornerShape(
+        topStart = dimensionResource(R.dimen.card_corner),
+        topEnd = dimensionResource(R.dimen.card_corner)
+    )
+
+    Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = colorResource(R.color.screen_background)
     ) { innerPadding ->
@@ -390,6 +396,17 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                     start = dimensionResource(R.dimen.dot_padding_start),
                     top = dimensionResource(R.dimen.dot_padding_top)
                 )
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = dimensionResource(R.dimen.box_top_offset))
+                    .shadow(
+                        elevation = dimensionResource(R.dimen.card_elevation),
+                        shape = cardShape
+                    )
+                    .clip(cardShape)
+                    .background(colorResource(R.color.card_background))
             )
         }
     }
