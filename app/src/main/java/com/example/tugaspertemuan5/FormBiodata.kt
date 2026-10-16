@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -16,6 +17,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
@@ -23,6 +25,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 
 @Composable
@@ -87,5 +91,26 @@ fun PageIndicator(modifier: Modifier = Modifier) {
                     )
             )
         }
+    }
+}
+
+@Composable
+fun FormHeader(modifier: Modifier = Modifier) {
+    Column (
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.space_small))
+    ) {
+        Text(
+            text = stringResource(R.string.title_form_biodata),
+            fontSize = spResource(R.dimen.text_title),
+            fontWeight = FontWeight.Bold,
+            color = colorResource(R.color.brand_purple)
+        )
+        Text(
+            text = stringResource(R.string.subtitle_form_biodata),
+            fontSize = spResource(R.dimen.text_subtitle),
+            color = colorResource(R.color.text_subtitle)
+        )
     }
 }
