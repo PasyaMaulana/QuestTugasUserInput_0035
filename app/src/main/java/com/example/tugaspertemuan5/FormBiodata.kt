@@ -16,6 +16,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenuItem
@@ -265,5 +267,33 @@ fun ExperienceDropdown(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun SkillCheckbox(
+    label: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            colors = CheckboxDefaults.colors(
+                checkedColor = colorResource(R.color.brand_purple),
+                uncheckedColor = colorResource(R.color.field_border),
+                checkmarkColor = colorResource(R.color.white)
+            )
+        )
+        Text(
+            text = label,
+            fontSize = spResource(R.dimen.text_small),
+            color = colorResource(R.color.text_primary)
+        )
     }
 }
