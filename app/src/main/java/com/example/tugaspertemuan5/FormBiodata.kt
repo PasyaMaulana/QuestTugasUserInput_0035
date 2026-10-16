@@ -385,6 +385,12 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
     var skillAndroid by remember { mutableStateOf(false) }
     var skillUiux by remember { mutableStateOf(false) }
     var skillWeb by remember { mutableStateOf(false) }
+    val isFormValid = namaDepan.isNotBlank() &&
+            namaBelakang.isNotBlank() &&
+            email.isNotBlank() &&
+            tglLahir.isNotBlank() &&
+            experience.isNotBlank() &&
+            (skillAndroid || skillUiux || skillWeb)
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -470,6 +476,10 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                             onAndroidChange = { skillAndroid = it },
                             onUiuxChange = { skillUiux = it },
                             onWebChange = { skillWeb = it }
+                        )
+                        ProceedButton(
+                            enabled = isFormValid,
+                            onClick = {}
                         )
                     }
                 }
