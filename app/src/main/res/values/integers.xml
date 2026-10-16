@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="weight_equal">1</integer>
+    <integer name="dot_count">4</integer>
+    <integer name="dot_active_index">0</integer>
+</resources>
