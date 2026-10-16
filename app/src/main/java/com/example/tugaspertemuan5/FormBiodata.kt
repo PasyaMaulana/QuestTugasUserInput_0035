@@ -382,6 +382,9 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
     var tglLahir by remember { mutableStateOf("") }
     var experience by remember { mutableStateOf("") }
     val weight = integerResource(R.integer.weight_equal).toFloat()
+    var skillAndroid by remember { mutableStateOf(false) }
+    var skillUiux by remember { mutableStateOf(false) }
+    var skillWeb by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -459,6 +462,14 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                             selected = experience,
                             onSelected = { experience = it },
                             modifier = Modifier.weight(weight)
+                        )
+                        SkillSection(
+                            android = skillAndroid,
+                            uiux = skillUiux,
+                            web = skillWeb,
+                            onAndroidChange = { skillAndroid = it },
+                            onUiuxChange = { skillUiux = it },
+                            onWebChange = { skillWeb = it }
                         )
                     }
                 }
