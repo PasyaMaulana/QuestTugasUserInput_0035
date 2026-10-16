@@ -1,6 +1,7 @@
 package com.example.tugaspertemuan5
 
 import android.text.format.DateUtils
+import android.widget.Toast
 import androidx.annotation.DimenRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -391,6 +392,8 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
             tglLahir.isNotBlank() &&
             experience.isNotBlank() &&
             (skillAndroid || skillUiux || skillWeb)
+    val context = LocalContext.current
+    val successMsgFormat = stringResource(R.string.msg_proceed_success)
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -469,19 +472,25 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                             onSelected = { experience = it },
                             modifier = Modifier.weight(weight)
                         )
-                        SkillSection(
-                            android = skillAndroid,
-                            uiux = skillUiux,
-                            web = skillWeb,
-                            onAndroidChange = { skillAndroid = it },
-                            onUiuxChange = { skillUiux = it },
-                            onWebChange = { skillWeb = it }
-                        )
-                        ProceedButton(
-                            enabled = isFormValid,
-                            onClick = {}
-                        )
                     }
+                    SkillSection(
+                        android = skillAndroid,
+                        uiux = skillUiux,
+                        web = skillWeb,
+                        onAndroidChange = { skillAndroid = it },
+                        onUiuxChange = { skillUiux = it },
+                        onWebChange = { skillWeb = it }
+                    )
+                    ProceedButton(
+                        enabled = isFormValid,
+                        onClick = {
+                            Toast.makeText(
+                                context,
+                                String.format(successMsgFormat, namaDepan, namaBelakang),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    )
                 }
             }
         }
