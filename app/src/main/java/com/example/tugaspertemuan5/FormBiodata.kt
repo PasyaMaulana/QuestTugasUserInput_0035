@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -111,6 +112,35 @@ fun FormHeader(modifier: Modifier = Modifier) {
             text = stringResource(R.string.subtitle_form_biodata),
             fontSize = spResource(R.dimen.text_subtitle),
             color = colorResource(R.color.text_subtitle)
+        )
+    }
+}
+
+@Composable
+fun NamaRow(
+    namaDepan: String,
+    namaBelakang: String,
+    onNamaDepanChange: (String) -> Unit,
+    onNamaBelakangChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val weight = integerResource(R.integer.weight_equal).toFloat()
+
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.space_medium))
+    ) {
+        FormTextField(
+            value = namaDepan,
+            onValueChange = onNamaDepanChange,
+            label = stringResource(R.string.label_nama_depan),
+            modifier = Modifier.weight(weight)
+        )
+        FormTextField(
+            value = namaBelakang,
+            onValueChange = onNamaBelakangChange,
+            label = stringResource(R.string.label_nama_belakang),
+            modifier = Modifier.weight(weight)
         )
     }
 }
