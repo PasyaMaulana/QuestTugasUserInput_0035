@@ -379,6 +379,9 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
     var namaDepan by remember { mutableStateOf("") }
     var namaBelakang by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
+    var tglLahir by remember { mutableStateOf("") }
+    var experience by remember { mutableStateOf("") }
+    val weight = integerResource(R.integer.weight_equal).toFloat()
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -441,6 +444,23 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                         modifier = Modifier.fillMaxWidth()
                     )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(
+                            dimensionResource(R.dimen.space_medium)
+                        )
+                    ) {
+                        DateField(
+                            value = tglLahir,
+                            onDateSelected = { tglLahir = it },
+                            modifier = Modifier.weight(weight)
+                        )
+                        ExperienceDropdown(
+                            selected = experience,
+                            onSelected = { experience = it },
+                            modifier = Modifier.weight(weight)
+                        )
+                    }
                 }
             }
         }
